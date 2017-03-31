@@ -1,0 +1,10 @@
+.row {
+  margin: 10px;
+}
+
+.header {
+  text-align: center;
+  background-color: lightgrey;
+  margin-top: 0px;
+  padding: 20px;
+}
