@@ -16,7 +16,7 @@ function validateTest(event) {
 
   event.preventDefault();
 
-  if (!$("#val-check").val() || isNaN($("#val-check").val()) || $("#val-check").val() <= 1) {
+  if (!$("#val-check").val() || isNaN($("#val-check").val()) || $("#val-check").val() != 5) {
 
     $("#alert-box").addClass("has-error");
     $("#feedback").attr("hidden", false).text("No GIF for you!").css('color', 'red');
@@ -42,19 +42,23 @@ function fetchAndDisplayGif() {
     // configure a few parameters to attach to our request
     var params = {
         api_key: "dc6zaTOxFJmzC",
-        tag : "jackson 5" + searchQuery
+        tag : "jackson 5 " + searchQuery
     };
 
     // make an ajax request for a random GIF
     $.ajax({
         url: "https://api.giphy.com/v1/gifs/random",
         data: params, // attach those extra parameters onto the request
+        beforeSend: function(){
+          console.log(searchQuery);
+          $("#feedback").attr("hidden", false).text("Loading...").css('color', 'black');
+        },
         success: function(response) {
             // if the response comes back successfully, the code in here will execute.
 
             // jQuery passes us the `response` variable, a regular javascript object created from the JSON the server gave us
-            console.log("we received a response!");
-            
+
+
             $("#gif").attr("src", response.data.image_url);
 
             $("#feedback").attr("hidden", true);
@@ -72,7 +76,7 @@ function fetchAndDisplayGif() {
     // TODO
     // give the user a "Loading..." message while they wait
 
-    $("#feedback").text("Loading...").css('color', 'black');
+
 
 }
 
